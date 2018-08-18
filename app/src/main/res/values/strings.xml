@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Zipper</string>
+    <string name="need_a_new_account">Need A NEW ACCOUNT ?</string>
+    <string name="display_name">Display Name</string>
+    <string name="log_out">Log Out</string>
+</resources>

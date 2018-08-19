@@ -9,6 +9,7 @@ import android.widget.Button;
 public class StartActivity extends AppCompatActivity {
 
   private Button mRegBtn;
+  private Button mLogbtn;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +17,7 @@ public class StartActivity extends AppCompatActivity {
     setContentView(R.layout.activity_start);
 
     mRegBtn = (Button) findViewById(R.id.start_reg_button);
+    mLogbtn = (Button) findViewById(R.id.start_log_button);
 
     mRegBtn.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -25,5 +27,16 @@ public class StartActivity extends AppCompatActivity {
 
       }
     });
+
+
+    mLogbtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent log_intent = new Intent(StartActivity.this,LoginActivity.class);
+        startActivity(log_intent);
+
+      }
+    });
+
   }
 }

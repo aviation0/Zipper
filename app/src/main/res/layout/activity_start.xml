@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".StartActivity">
 
     <TextView
@@ -12,14 +13,31 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Welcome to Zipper"
-        android:textSize="24sp" />
+        android:textColor="@android:color/white"
+        android:textSize="26sp" />
 
     <Button
         android:id="@+id/start_reg_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/start_log_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-202dp"
+        android:paddingLeft="34dp"
+        android:paddingRight="34dp"
+        android:text="@string/need_a_new_account"
+        android:textColor="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/start_log_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="156dp"
-        android:text="@string/need_a_new_account" />
+        android:layout_marginBottom="202dp"
+        android:backgroundTint="@color/colorAccent"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/already_have_account"
+        android:textColor="@android:color/white" />
 </RelativeLayout>

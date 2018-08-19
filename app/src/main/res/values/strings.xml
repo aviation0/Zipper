@@ -3,4 +3,7 @@
     <string name="need_a_new_account">Need A NEW ACCOUNT ?</string>
     <string name="display_name">Display Name</string>
     <string name="log_out">Log Out</string>
+    <string name="already_have_account">Already Have Account</string>
+    <string name="your_email">Your Email</string>
+    <string name="password">Password</string>
 </resources>

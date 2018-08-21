@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "707871267100",
+    "firebase_url": "https://zipper-2d274.firebaseio.com",
+    "project_id": "zipper-2d274",
+    "storage_bucket": "zipper-2d274.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707871267100:android:5390a088925cd009",
+        "android_client_info": {
+          "package_name": "com.example.avi.zipper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707871267100-nbvgr3uffe0hunh65g49pb6h1jfhma1g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.avi.zipper",
+            "certificate_hash": "9763d2fc777ba90e2c4d81ca936971557e6a1d90"
+          }
+        },
+        {
+          "client_id": "707871267100-rgjfe7t9895u2ics6m5nhu7t9dfl6hfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFMT3Qz-KG04WNC5K21FMMoVK1iBFLSZE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707871267100-rgjfe7t9895u2ics6m5nhu7t9dfl6hfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

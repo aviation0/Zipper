@@ -12,4 +12,5 @@
     <string name="hi_there_i_m_using_zipper">Hi there, I\'m using Zipper</string>
     <string name="settings_display_name">Display Name</string>
     <string name="settings_default_status">Hi there, I\'m using zipper</string>
+    <string name="chat_page">Chat Page</string>
 </resources>

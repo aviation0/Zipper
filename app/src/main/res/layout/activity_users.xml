@@ -14,7 +14,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="?android:attr/actionBarSize">
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:background="@color/backgroundFragment">
 
     </android.support.v7.widget.RecyclerView>
 

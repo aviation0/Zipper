@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -12,6 +13,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
   @Override
   public void onMessageReceived(RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
+
+    String remoteId = remoteMessage.getMessageId();
+    Log.i("NOTIFICATION ID",remoteId);
 
     String notification_title = remoteMessage.getNotification().getTitle();
     String notification_message = remoteMessage.getNotification().getBody();

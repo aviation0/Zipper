@@ -1,7 +1,13 @@
 package com.example.avi.zipper;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -35,6 +43,8 @@ public class FriendsFragment extends Fragment {
   private FirebaseAuth mAuth;
   private String mCurrent_user_id;
   private View mMainView;
+
+  private Dialog myDialog;
 
 
   public FriendsFragment() {
@@ -83,17 +93,69 @@ public class FriendsFragment extends Fragment {
 
                 viewHolder.setDate(model.getDate());
 
-                String list_user_id = getRef(position).getKey();
+
+                final String list_user_id = getRef(position).getKey();
+
+
 
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                   @Override
                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    String userName = dataSnapshot.child("name").getValue().toString();
-                    String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                    final String userName = dataSnapshot.child("name").getValue().toString();
+                    final String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                    final String userStatus = dataSnapshot.child("status").getValue().toString();
+
+                    if(dataSnapshot.hasChild("online")){
+                      String userOnline = dataSnapshot.child("online").getValue().toString();
+                      viewHolder.setUserOnline(userOnline);
+                    }
 
                     viewHolder.setName(userName);
-                    viewHolder.setUserImage(userThumb,getContext());
+                    viewHolder.setUserImage(userThumb, getContext());
+
+                    myDialog = new Dialog(getContext());
+                    myDialog.setContentView(R.layout.dialog_friend);
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogSlide;
+
+                    viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+
+                        TextView dialog_name = myDialog.findViewById(R.id.dialog_name_id);
+                        TextView dialog_status = myDialog.findViewById(R.id.dialog_status_id);
+                        ImageView dialog_image = myDialog.findViewById(R.id.dialog_image);
+                        dialog_name.setText(userName);
+                        dialog_status.setText(userStatus);
+                        Picasso.get().load(userThumb).placeholder(R.drawable.boy).into(dialog_image);
+
+                        myDialog.show();
+
+                        Button profileButton = myDialog.findViewById(R.id.dialog_btn_profile);
+                        Button chatButton = myDialog.findViewById(R.id.dialog_btn_chat);
+
+                        profileButton.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View v) {
+                            Intent profileIntent = new Intent(getContext(),ProfileActivity.class);
+                            profileIntent.putExtra("user_id",list_user_id);
+                            startActivity(profileIntent);
+                          }
+                        });
+
+                        chatButton.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View v) {
+                            Intent chatIntent = new Intent(getContext(),ChatActivity.class);
+                            chatIntent.putExtra("user_id",list_user_id);
+                            chatIntent.putExtra("user_name",userName);
+                            startActivity(chatIntent);
+                          }
+                        });
+
+                      }
+                    });
 
 
                   }
@@ -109,6 +171,7 @@ public class FriendsFragment extends Fragment {
     mFriendsList.setAdapter(firebaseRecyclerAdapter);
 
   }
+  
 
   public static class FriendsViewHolder extends RecyclerView.ViewHolder {
 
@@ -137,6 +200,18 @@ public class FriendsFragment extends Fragment {
 
       CircleImageView userImageView = mView.findViewById(R.id.user_single_image);
       Picasso.get().load(thumb_image).placeholder(R.drawable.boy).into(userImageView);
+
+    }
+
+    public void setUserOnline(String online_status){
+
+      ImageView userOnlineView = mView.findViewById(R.id.user_single_online_icon);
+
+      if(online_status.equals("true")){
+        userOnlineView.setVisibility(View.VISIBLE);
+      } else {
+        userOnlineView.setVisibility(View.INVISIBLE);
+      }
 
     }
 

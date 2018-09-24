@@ -13,8 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Welcome to Zipper"
-        android:textColor="@android:color/white"
-        android:textSize="26sp" />
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/start_reg_button"

@@ -290,7 +290,7 @@ public class SettingsActivity extends AppCompatActivity {
 
   }
 
-  /*
+
   @Override
   public void onStart() {
     super.onStart();
@@ -308,12 +308,11 @@ public class SettingsActivity extends AppCompatActivity {
   }
 
   @Override
-  protected void onStop() {
-    super.onStop();
+  protected void onPause() {
+    super.onPause();
 
     mUserRef.child("online").setValue(false);
-
   }
-  */
+
 
 }

@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +38,9 @@ public class UsersActivity extends AppCompatActivity {
   private RecyclerView mUsersList;
   private DatabaseReference mUsersDatabase;
 
+  private FirebaseAuth mAuth;
+  private DatabaseReference mUserRef;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -46,6 +51,9 @@ public class UsersActivity extends AppCompatActivity {
     setSupportActionBar(mToolbar);
     getSupportActionBar().setTitle("All Users");
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    mAuth = FirebaseAuth.getInstance();
+    mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
     mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -59,6 +67,17 @@ public class UsersActivity extends AppCompatActivity {
   @Override
   protected void onStart() {
     super.onStart();
+
+    // Check if user is signed in (non-null) and update UI accordingly.
+    FirebaseUser currentUser = mAuth.getCurrentUser();
+
+    if(currentUser == null) {
+
+    } else {
+
+      mUserRef.child("online").setValue(true);
+
+    }
 
     FirebaseRecyclerAdapter<Users,UsersViewHolder> firebaseRecyclerAdapter =
             new FirebaseRecyclerAdapter<Users, UsersViewHolder>(
@@ -126,6 +145,16 @@ public class UsersActivity extends AppCompatActivity {
     }
 
   }
+
+
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+
+    mUserRef.child("online").setValue(false);
+  }
+
 }
 
 
